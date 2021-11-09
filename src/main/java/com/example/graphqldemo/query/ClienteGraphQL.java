@@ -3,7 +3,9 @@ package com.example.graphqldemo.query;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.example.graphqldemo.model.Cliente;
+import com.example.graphqldemo.model.dto.ClienteInput;
 import com.example.graphqldemo.service.ClienteService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,8 +25,10 @@ public class ClienteGraphQL implements GraphQLQueryResolver, GraphQLMutationReso
         return clienteService.findAll();
     }
 
-    public Cliente saveCliente(Long id, String nome, String email){
-        return clienteService.save(new Cliente(id, nome, email));
+    public Cliente saveCliente(ClienteInput input){
+        ModelMapper modelMapper = new ModelMapper();
+        Cliente cliente = modelMapper.map(input, Cliente.class);
+        return clienteService.save(cliente);
     }
 
     public Boolean deleteCliente(Long id) {
