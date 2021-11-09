@@ -2,7 +2,6 @@ package com.example.graphqldemo.service;
 
 import com.example.graphqldemo.model.Cliente;
 import com.example.graphqldemo.repository.ClienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -11,8 +10,12 @@ import java.util.List;
 @Service
 public class ClienteService {
 
-    @Autowired
+
     private ClienteRepository clienteRepository;
+
+    public ClienteService(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
+    }
 
     public Cliente findById(Long id) {
         return clienteRepository.findById(id).orElse(null);

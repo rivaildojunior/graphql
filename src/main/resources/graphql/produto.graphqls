@@ -7,7 +7,7 @@ type Produto {
 input ProdutoInput {
     id:ID
     nome: String!
-    valor: Float!
+    valor: Float
 }
 
 extend type Query {

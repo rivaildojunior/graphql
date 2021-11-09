@@ -6,7 +6,6 @@ import com.example.graphqldemo.model.Cliente;
 import com.example.graphqldemo.model.dto.ClienteInput;
 import com.example.graphqldemo.service.ClienteService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,8 +13,12 @@ import java.util.List;
 @Component
 public class ClienteGraphQL implements GraphQLQueryResolver, GraphQLMutationResolver {
 
-    @Autowired
+
     private ClienteService clienteService;
+
+    public ClienteGraphQL(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
     public Cliente cliente(Long id) {
         return clienteService.findById(id);
