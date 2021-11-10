@@ -9,6 +9,9 @@ import com.example.graphqldemo.service.ClienteService;
 import com.example.graphqldemo.service.CompraService;
 import com.example.graphqldemo.service.ProdutoService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -34,8 +37,9 @@ public class CompraGraphQL implements GraphQLQueryResolver, GraphQLMutationResol
         return compraService.findById(id);
     }
 
-    public List<Compra> compras() {
-        return compraService.findAll();
+    public List<Compra> compras(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("quantidade").descending());
+        return compraService.findAll(pageable);
     }
 
     public Compra saveCompra(CompraInput input){

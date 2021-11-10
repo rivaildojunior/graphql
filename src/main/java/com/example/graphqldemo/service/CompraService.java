@@ -4,6 +4,7 @@ import com.example.graphqldemo.model.Cliente;
 import com.example.graphqldemo.model.Compra;
 import com.example.graphqldemo.model.dto.CompraResumo;
 import com.example.graphqldemo.repository.CompraRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -23,8 +24,8 @@ public class CompraService {
         return compraRepository.findById(id).orElse(null);
     }
 
-    public List<Compra> findAll() {
-        return compraRepository.findAll();
+    public List<Compra> findAll(Pageable pageable) {
+        return compraRepository.findAll(pageable).getContent();
     }
 
     @Transactional
