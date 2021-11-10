@@ -4,6 +4,7 @@ import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.example.graphqldemo.model.Compra;
 import com.example.graphqldemo.model.dto.CompraInput;
+import com.example.graphqldemo.model.dto.CompraResumo;
 import com.example.graphqldemo.service.ClienteService;
 import com.example.graphqldemo.service.CompraService;
 import com.example.graphqldemo.service.ProdutoService;
@@ -50,5 +51,9 @@ public class CompraGraphQL implements GraphQLQueryResolver, GraphQLMutationResol
 
     public Boolean deleteCompra(Long id) {
         return compraService.deleteById(id);
+    }
+
+    public List<CompraResumo> getComprasRelatorio() {
+        return compraService.findAllComprasRelatorio();
     }
 }

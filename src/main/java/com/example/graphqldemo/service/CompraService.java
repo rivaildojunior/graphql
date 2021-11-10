@@ -2,6 +2,7 @@ package com.example.graphqldemo.service;
 
 import com.example.graphqldemo.model.Cliente;
 import com.example.graphqldemo.model.Compra;
+import com.example.graphqldemo.model.dto.CompraResumo;
 import com.example.graphqldemo.repository.CompraRepository;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +43,9 @@ public class CompraService {
 
     public List<Compra> findAllByCliente(Cliente cliente) {
         return compraRepository.findAllByCliente(cliente);
+    }
+
+    public List<CompraResumo> findAllComprasRelatorio() {
+        return compraRepository.findAllComprasRelatorio();
     }
 }
